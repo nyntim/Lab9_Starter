@@ -102,6 +102,91 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    // Sample data the demos operate on
+    const sampleObj = {
+      name: 'Error Calculator',
+      version: 9,
+      operators: ['+', '-', '*', '/']
+    };
+    const sampleTable = [
+      { lab: 'Lab 7', topic: 'Web Components', done: true },
+      { lab: 'Lab 8', topic: 'Promises', done: true },
+      { lab: 'Lab 9', topic: 'Console API', done: false }
+    ];
+
+    // 0: Console Log — print a simple message
+    errorBtns[0].addEventListener('click', () => {
+      console.log('Console Log demo: the calculator loaded successfully.');
+    });
+
+    // 1: Console Error — print an error-styled message
+    errorBtns[1].addEventListener('click', () => {
+      console.error('Console Error demo: something went wrong (not really).');
+    });
+
+    // 2: Console Count — increment a labeled counter each click
+    errorBtns[2].addEventListener('click', () => {
+      console.count('Console Count demo');
+    });
+
+    // 3: Console Warn — print a warning-styled message
+    errorBtns[3].addEventListener('click', () => {
+      console.warn('Console Warn demo: this is a warning.');
+    });
+
+    // 4: Console Assert — only logs when the condition is false
+    errorBtns[4].addEventListener('click', () => {
+      console.assert(1 === 2, 'Console Assert demo: 1 does not equal 2.');
+    });
+
+    // 5: Console Clear — wipe the console output
+    errorBtns[5].addEventListener('click', () => {
+      console.clear();
+    });
+
+    // 6: Console Dir — show an interactive list of an object's properties
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(sampleObj);
+    });
+
+    // 7: Console dirxml — show an XML/HTML element tree
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(document.querySelector('#error-btns'));
+    });
+
+    // 8: Console Group Start — open a collapsible group of messages
+    errorBtns[8].addEventListener('click', () => {
+      console.group('Console Group demo');
+      console.log('This message is inside the group.');
+      console.log('So is this one — press "Console Group End" to close it.');
+    });
+
+    // 9: Console Group End — close the most recently opened group
+    errorBtns[9].addEventListener('click', () => {
+      console.log('This message closes the group.');
+      console.groupEnd();
+    });
+
+    // 10: Console Table — render array/object data as a table
+    errorBtns[10].addEventListener('click', () => {
+      console.table(sampleTable);
+    });
+
+    // 11: Start Timer — begin a named timer
+    errorBtns[11].addEventListener('click', () => {
+      console.time('Console Timer demo');
+    });
+
+    // 12: End Timer — stop the named timer and print elapsed time
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd('Console Timer demo');
+    });
+
+    // 13: Console Trace — print the call stack from this point
+    errorBtns[13].addEventListener('click', () => {
+      console.trace('Console Trace demo');
+    });
   </script>
 </body>
 
