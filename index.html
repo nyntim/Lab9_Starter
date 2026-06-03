@@ -88,6 +88,15 @@
   </main>
 
   <script>
+    // Custom error type: extends Error, carries the offending expression.
+    class CalculatorError extends Error {
+      constructor(message, expression) {
+        super(message);
+        this.name = 'CalculatorError';
+        this.expression = expression;
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -95,13 +104,21 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
+      let expression = `${firstNum} ${operator} ${secondNum}`;
       try {
-        // Comment out <output> in the HTML and this throws instead of crashing.
-        if (!output) throw new Error('Missing <output> element');
-        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+        // Our own validation error for empty fields.
+        if (firstNum === '' || secondNum === '') {
+          throw new CalculatorError('Both numbers are required', expression);
+        }
+        output.innerHTML = eval(expression);
       } catch (err) {
-        // eval() also lands here on bad input (e.g. "3 +" -> SyntaxError).
-        console.error(`${err.name}: ${err.message}`);
+        // Tell our error apart from eval()'s built-in errors via instanceof.
+        if (err instanceof CalculatorError) {
+          console.error(`${err.name} on "${err.expression}": ${err.message}`);
+        } else {
+          console.error(`${err.name}: ${err.message}`);
+        }
+        output.innerHTML = 'Error';
       } finally {
         console.log('Calculation attempted.');
       }
