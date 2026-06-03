@@ -213,6 +213,18 @@
     errorBtns[13].addEventListener('click', () => {
       console.trace('Console Trace demo');
     });
+
+    // Global handler: catches errors that escape any try/catch. This is where
+    // you'd send the details elsewhere via fetch()/XMLHttpRequest.
+    window.onerror = (message, source, lineno, colno, error) => {
+      console.log(`Global error caught: "${message}" at line ${lineno}`);
+    };
+
+    // 14: Trigger a Global Error — throw without a try/catch around it so the
+    // error bubbles up to window.onerror above.
+    errorBtns[14].addEventListener('click', () => {
+      throw new Error('This error was triggered on purpose');
+    });
   </script>
 </body>
 
